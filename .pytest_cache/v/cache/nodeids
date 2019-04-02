@@ -1,0 +1,22 @@
+[
+  "bases_test.py::BasesDecodeTest::test_decode_10",
+  "bases_test.py::BasesDecodeTest::test_decode_1010",
+  "bases_test.py::BasesDecodeTest::test_decode_101101",
+  "bases_test.py::BasesDecodeTest::test_decode_binary",
+  "bases_test.py::BasesDecodeTest::test_decode_decimal",
+  "bases_test.py::BasesDecodeTest::test_decode_hexadecimal",
+  "bases_test.py::BasesEncodeTest::test_encode_1234",
+  "bases_test.py::BasesEncodeTest::test_encode_248975",
+  "bases_test.py::BasesEncodeTest::test_encode_binary",
+  "bases_test.py::BasesEncodeTest::test_encode_decimal",
+  "bases_test.py::BasesEncodeTest::test_encode_hexadecimal",
+  "bases_test.py::BasesEncodeTest::test_encode_into_10",
+  "bases_test.py::BasesEncodeTest::test_encode_into_1010",
+  "bases_test.py::BasesEncodeTest::test_encode_into_101101",
+  "bases_test.py::BasesConvertTest::test_convert_binary_to_hexadecimal",
+  "bases_test.py::BasesConvertTest::test_convert_decimal_to_hexadecimal",
+  "bases_test.py::BasesConvertTest::test_convert_from_binary",
+  "bases_test.py::BasesConvertTest::test_convert_hexadecimal_to_binary",
+  "bases_test.py::BasesConvertTest::test_convert_hexadecimal_to_decimal",
+  "bases_test.py::BasesConvertTest::test_convert_to_binary"
+]

@@ -9,14 +9,62 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
-
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
     base: int -- base of given number
     return: int -- integer representation of number (in base 10)"""
+    
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+
+    # PSEUDO BRAINSTORM
+    # map that starts out adding 1, 10, 100, etc. based on binary values
+    # map function that takes in the length of digits and generates a map then subtracts from total
+
+    # 	var romanNumeralDict map[int]string = map[int]string{
+	# 	1000: "M",
+	# 	900:  "CM",
+	# 	500:  "D",
+	# 	400:  "CD",
+	# 	100:  "C",
+	# 	90:   "XC",
+	# 	50:   "L",
+	# 	40:   "XL",
+	# 	10:   "X",
+	# 	9:    "IX",
+	# 	5:    "V",
+	# 	4:    "IV",
+	# 	1:    "I",
+	# }
+    
+    # test = map(lambda x: 2 ** x)
+
+    # PSEUDO 2
+    # for length of digits, becomes 2 to the power of n - 1
+    # add total values if value at position = 1
+    #  n - 1
+    # total = 0
+    # for bit in len(digits):
+    #     if digits[bit] == 1:
+    #         total += digits ** (bit - 1)
+    #     else:
+    #         continue
+
+    total = 0
+    for bit in range(len(digits)):
+        if bit in string.digits:
+            if digits[bit] == 1:
+                total += digits ** (bit - 1)
+            else:
+                continue
+        elif bit in string.hexdigits:
+            pass
+        # section to do digits from any base
+        else:
+            pass
+
+
     # TODO: Decode digits from binary (base 2)
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
