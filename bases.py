@@ -51,24 +51,35 @@ def decode(digits, base):
     #     else:
     #         continue
 
-    total = 0
-    for bit in range(len(digits)):
-        if bit in string.digits:
-            if digits[bit] == 1:
-                total += digits ** (bit - 1)
-            else:
-                continue
-        elif bit in string.hexdigits:
-            pass
-        # section to do digits from any base
-        else:
-            pass
 
 
     # TODO: Decode digits from binary (base 2)
-    # ...
+    # total = 0
+    # for bit in range(0, len(digits)):
+    #     # if digits in string.digits:
+    #     print(digits[bit])
+    #     if digits[bit] == '1':
+    #         total += base ** int(digits[bit])
+    #     else:
+    #         continue
+    # return total
     # TODO: Decode digits from hexadecimal (base 16)
-    # ...
+    
+    # PSEUDO BRAINSTORM:
+    # 110
+
+    total = 0
+    power = len(digits) - 1
+
+    for character in digits:
+        print('DID IT WORK?')
+        total += string.printable.index(character) * (base ** power)
+        power -= 1
+    return total
+
+
+
+
     # TODO: Decode digits from any base (2 up to 36)
     # ...
 
@@ -85,7 +96,27 @@ def encode(number, base):
     # TODO: Encode number in binary (base 2)
     # ...
     # TODO: Encode number in hexadecimal (base 16)
-    # ...
+
+    # PSEUDO BRAINSTORM
+    # divide the decimal number by 16 repeatedly.
+    # write the last remainder you obtained in the hex equivalent column
+    # If the remainder is more than nine, remember to change it to its hex letter equivalent. 
+    # Return the remainders in reverse order
+
+    result = digits
+    # remainder = digits % 16
+    tmp_remainder = []
+    tmp_hex = []
+
+    while result > 0:
+        remainder = digits % base
+        tmp_remainder.append(remainder)
+        result = int(digits / base)
+        tmp_hex.append(string.hexdigits[remainder])
+        print('LOOK HERE STUPID', tmp_hex)
+        digits = result
+    return tmp_hex[::-1]
+
     # TODO: Encode number in any base (2 up to 36)
     # ...
 
