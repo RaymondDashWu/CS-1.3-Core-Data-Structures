@@ -1,8 +1,1 @@
-{
-  "bases_test.py::BasesConvertTest::test_convert_binary_to_hexadecimal": true,
-  "bases_test.py::BasesConvertTest::test_convert_decimal_to_hexadecimal": true,
-  "bases_test.py::BasesConvertTest::test_convert_from_binary": true,
-  "bases_test.py::BasesConvertTest::test_convert_hexadecimal_to_binary": true,
-  "bases_test.py::BasesConvertTest::test_convert_hexadecimal_to_decimal": true,
-  "bases_test.py::BasesConvertTest::test_convert_to_binary": true
-}
+{}

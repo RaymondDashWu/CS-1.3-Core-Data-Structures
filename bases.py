@@ -139,8 +139,9 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
-
+    # test = decode(digits, base1)
+    # return encode(test, base2)
+    return encode(decode(digits, base1), base2)
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
