@@ -72,7 +72,6 @@ def decode(digits, base):
     power = len(digits) - 1
 
     for character in digits:
-        print('DID IT WORK?')
         total += string.printable.index(character) * (base ** power)
         power -= 1
     return total
@@ -94,7 +93,8 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+    # PSEUDO BRAINSTORM
+    # 
     # TODO: Encode number in hexadecimal (base 16)
 
     # PSEUDO BRAINSTORM
@@ -103,19 +103,21 @@ def encode(number, base):
     # If the remainder is more than nine, remember to change it to its hex letter equivalent. 
     # Return the remainders in reverse order
 
-    result = digits
+    result = number
     # remainder = digits % 16
     tmp_remainder = []
-    tmp_hex = []
+    tmp_decimal = ""
+
 
     while result > 0:
-        remainder = digits % base
+        remainder = number % base
         tmp_remainder.append(remainder)
-        result = int(digits / base)
-        tmp_hex.append(string.hexdigits[remainder])
-        print('LOOK HERE STUPID', tmp_hex)
-        digits = result
-    return tmp_hex[::-1]
+        result = int(number / base)
+        # tmp_decimal.append(string.printable[remainder])
+        tmp_decimal += string.printable[remainder]
+        print('LOOK HERE STUPID', tmp_decimal)
+        number = result
+    return tmp_decimal[::-1]
 
     # TODO: Encode number in any base (2 up to 36)
     # ...
