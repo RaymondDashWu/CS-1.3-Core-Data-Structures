@@ -1,6 +1,6 @@
 [
-  "recursion_test.py::RecursionTest::test_factorial_with_floating_point_numbers",
-  "recursion_test.py::RecursionTest::test_factorial_with_large_integers",
-  "recursion_test.py::RecursionTest::test_factorial_with_negative_integers",
-  "recursion_test.py::RecursionTest::test_factorial_with_small_integers"
+  "search_test.py::SearchTest::test_binary_search_with_items_in_list",
+  "search_test.py::SearchTest::test_binary_search_with_items_not_in_list",
+  "search_test.py::SearchTest::test_linear_search_with_items_in_list",
+  "search_test.py::SearchTest::test_linear_search_with_items_not_in_list"
 ]
