@@ -3,7 +3,6 @@
 def factorial(n):
     """factorial(n) returns the product of the integers 1 through n for n >= 0,
     otherwise raises ValueError for n < 0 or non-integer n"""
-    # TODO: Annotate functions with complexity analysis of running time and space (memory)
     # check if n is negative or not an integer (invalid input)
     if not isinstance(n, int) or n < 0:
         raise ValueError('factorial is undefined for n = {}'.format(n))
@@ -16,6 +15,7 @@ def factorial(n):
 def factorial_iterative(n):
     # TODO: implement the factorial function iteratively here
     # TODO: Annotate functions with complexity analysis of running time and space (memory)
+    # Time - O(n) Space - O(n)
     total = 1
     for num in range(1, n):
         if n > 1:
