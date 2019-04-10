@@ -1,8 +1,0 @@
-{
-  "CS-1.3-Core-Data-Structures/Lessons/source/bases_test.py": true,
-  "CS-1.3-Core-Data-Structures/Lessons/source/binarytree_test.py": true,
-  "CS-1.3-Core-Data-Structures/Lessons/source/recursion_test.py": true,
-  "CS-1.3-Core-Data-Structures/Lessons/source/search_test.py": true,
-  "search_test.py::SearchTest::test_binary_search_with_items_in_list": true,
-  "search_test.py::SearchTest::test_binary_search_with_items_not_in_list": true
-}
