@@ -13,8 +13,8 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
@@ -36,7 +36,8 @@ def is_palindrome_iterative(text):
     import re
     text_only = re.sub(r"[^a-z\d]+", '', lower_text)
 
-    # Logic: This checks two letters at a time: first and last.
+    # Logic: This checks two letters at a time: first and last to see if they're equal.
+    # If not, return False
     backwards_counter = -1
     for letter in range(0, (len(text_only) // 2)):
         if text_only[letter] == text_only[backwards_counter]:
@@ -45,13 +46,25 @@ def is_palindrome_iterative(text):
             return False
     return True
 
+def is_palindrome_recursive(text, left=0, right=-1):
+    lower_text = text.lower()
 
-def is_palindrome_recursive(text, left=None, right=None):
-    # TODO: implement the is_palindrome function recursively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    # This filters out all characters except letters and numbers. 
+    import re
+    text_only = re.sub(r"[^a-z\d]+", '', lower_text)
 
+    # Edge case of nothing in string
+    if len(text) == 0:
+        return True
+
+    # Logic: This checks two letters at a time: first and last to see if they're equal.
+    # If not, return False
+    if text_only[left] != text_only[right]:
+        return False
+    elif left == (len(text) // 2):
+        return True
+    else:
+        return is_palindrome_recursive(text, left + 1, right - 1)
 
 def main():
     import sys
