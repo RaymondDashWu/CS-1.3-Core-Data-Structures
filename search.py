@@ -51,11 +51,10 @@ def binary_search_iterative(array, item):
 
     while array[middle] != item:
         if array[middle] > item:
-            array = range(array[middle], array[-1])
+            array = range(middle, (len(array) - 1))
         elif array[middle] < item:
-            array = range(0, array[middle])
-        elif array[middle] == item:
-            return middle
+            array = range(0, middle)
+    return array[middle]
 
     # if array[middle] == item:
     #     return middle

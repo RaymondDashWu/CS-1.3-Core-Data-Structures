@@ -4,10 +4,42 @@ def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    if pattern in text:
+
+    # PSEUDO BRAINSTORM
+    # Iterate through letters in text and pattern, comparing patterns
+    # Ex: in "banana" looking for "an". Would look at first letter of text - "b"
+    # and then seeing if it matches with the first letter of pattern "a". In first
+    # loop through it does not so it goes to next letter. Finds "a" in text, which matches
+    # with "a" in pattern. Then checks for next letter "n" vs "n". Returns index
+
+    # if pattern in text:
+    #     return True
+    # else:
+    #     return False    
+
+
+
+    if len(pattern) == 0:
         return True
-    else:
-        return False    
+
+    counter = 0 # counts pattern
+    goal = len(pattern) # Once counter == goal, return True
+
+    # Logic: Compare text with first letter in pattern. If matches, then counter + 1. 
+    # If counter reaches same number as goal then return True
+    for letter in text:
+        if letter == pattern[counter]:
+            counter += 1
+            if counter == goal:
+                return True
+        else:
+            counter = 0
+            if letter == pattern[counter]:
+                counter += 1
+    return False
+            
+
+                
 
     # Recursive - ???
 
@@ -18,6 +50,36 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
+    # PSEUDO BRAINSTORM
+    # Iterate through letters in text and pattern, comparing patterns
+    # Ex: in "banana" looking for "an". Would look at first letter of text - "b"
+    # and then seeing if it matches with the first letter of pattern "a". In first
+    # loop through it does not so it goes to next letter. Finds "a" in text, which matches
+    # with "a" in pattern. Then checks for next letter "n" vs "n". Returns index
+    
+    # if len(pattern) == 0:
+    #     return 0
+
+    # for letter in text:
+    #     if letter == pattern:
+    #         for pattern_index in range(len(pattern)):
+    #             if pattern[pattern_index] == text[]
+                # would have to return index - n
+
+    counter = 0
+    goal = len(pattern)
+
+    for i, letter in enumerate(text, start = 1):
+        if letter == pattern[counter]:
+            counter += 1
+            if counter == goal:
+                return i
+        else:
+            counter = 0
+            if letter == pattern[counter]:
+                counter += 1
+
+    
 
 
 def find_all_indexes(text, pattern):
@@ -27,6 +89,24 @@ def find_all_indexes(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
+    counter = 0
+    goal = len(pattern)
+    index_list = []
+
+    for i, letter in enumerate(text):
+        print("i:", i)
+        print("pattern:", pattern)
+        print("text:", text)
+        print("index_list:", index_list)
+        if letter == pattern[0]:
+            counter += 1
+            if counter == goal:
+                index_list.append(i) # Note: This line broken. Won't append with the proper number?
+        else:
+            counter = 0
+            if letter == pattern[counter]:
+                counter += 1
+    return index_list
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
