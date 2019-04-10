@@ -93,7 +93,7 @@ def find_all_indexes(text, pattern):
     goal = len(pattern)
     index_list = []
 
-    for i, letter in enumerate(text):
+    for i, letter in enumerate(text, start = 1):
         print("i:", i)
         print("pattern:", pattern)
         print("text:", text)

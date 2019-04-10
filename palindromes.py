@@ -47,6 +47,18 @@ def is_palindrome_iterative(text):
     return True
 
 def is_palindrome_recursive(text, left=0, right=-1):
+    # PSEUDO BRAINSTORM
+    # Resource - 
+    # https://www.willpeavy.com/palindrome/ for understanding palindrome edge cases
+    # 
+    # Prework - 
+    # [X] change all words to lowercase
+    # [X] filter out all non-letters using regex
+    # 
+    # Iterate through letters in half the text by
+    # floor dividing to range. I think it works with odd or even numbered text?
+    # have second pointer that checks if last letter
+
     lower_text = text.lower()
 
     # This filters out all characters except letters and numbers. 
@@ -61,6 +73,7 @@ def is_palindrome_recursive(text, left=0, right=-1):
     # If not, return False
     if text_only[left] != text_only[right]:
         return False
+    # Counter that checks when True by checking if left equals length of text divided by 2 rounded down
     elif left == (len(text) // 2):
         return True
     else:
