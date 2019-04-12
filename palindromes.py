@@ -6,6 +6,10 @@ import string
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 
+# Note: By filtering out text and then comparing I ruin my best case scenario time complexity
+# in the instance of a scenario where the first and last letter are different. If my algorithm just compared
+# the letters I'd have an O(1) operation whereas the code here has to filter and lowercase everything first,
+# making it O(N) best case. 
 
 def is_palindrome(text):
     """A string of characters is a palindrome if it reads the same forwards and
@@ -13,6 +17,13 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
+    
+    text = text.lower()
+    
+    # This filters out all characters except letters and numbers. 
+    import re
+    text = re.sub(r"[^a-z\d]+", '', text)
+
     # return is_palindrome_iterative(text)
     return is_palindrome_recursive(text)
 
@@ -30,17 +41,11 @@ def is_palindrome_iterative(text):
     # floor dividing to range. I think it works with odd or even numbered text?
     # have second pointer that checks if last letter
 
-    lower_text = text.lower()
-
-    # This filters out all characters except letters and numbers. 
-    import re
-    text_only = re.sub(r"[^a-z\d]+", '', lower_text)
-
     # Logic: This checks two letters at a time: first and last to see if they're equal.
     # If not, return False
     backwards_counter = -1
-    for letter in range(0, (len(text_only) // 2)):
-        if text_only[letter] == text_only[backwards_counter]:
+    for letter in range(0, (len(text) // 2)):
+        if text[letter] == text[backwards_counter]:
             backwards_counter -= 1
         else:
             return False
@@ -59,19 +64,13 @@ def is_palindrome_recursive(text, left=0, right=-1):
     # floor dividing to range. I think it works with odd or even numbered text?
     # have second pointer that checks if last letter
 
-    lower_text = text.lower()
-
-    # This filters out all characters except letters and numbers. 
-    import re
-    text_only = re.sub(r"[^a-z\d]+", '', lower_text)
-
     # Edge case of nothing in string
     if len(text) == 0:
         return True
 
     # Logic: This checks two letters at a time: first and last to see if they're equal.
     # If not, return False
-    if text_only[left] != text_only[right]:
+    if text[left] != text[right]:
         return False
     # Counter that checks when True by checking if left equals length of text divided by 2 rounded down
     elif left == (len(text) // 2):
