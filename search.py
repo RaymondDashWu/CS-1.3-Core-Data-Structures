@@ -32,8 +32,9 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return binary_search_iterative(array, item)
-    # return binary_search_recursive(array, item)
+    array.sort()
+    # return binary_search_iterative(array, item)
+    return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
@@ -44,7 +45,6 @@ def binary_search_iterative(array, item):
     # if not, compare whether or not the item is greater or equal to middle item
     # if greater, repeat for half in the range of middle item to end
     # if less, repeat for half in the range of beginning to middle item
-    array.sort()
     
     middle = len(array) // 2
     left = 0
@@ -63,7 +63,7 @@ def binary_search_iterative(array, item):
     # Brian found!
     while array[middle] != item:
         # Covers edge cases where searches go out of bounds on either left or right side
-        if middle < 0 or left > (len(array) - 1):
+        if middle == right or left > (len(array) - 1):
             return None
         # Right looking. If item is on the right side after middle lookup
         if array[middle] < item:
@@ -76,9 +76,24 @@ def binary_search_iterative(array, item):
     return middle
 
 
-def binary_search_recursive(array, item, left=None, right=None):
-    # TODO: implement binary search recursively here
-    # TODO: Annotate functions with complexity analysis of running time and space (memory)
-    pass
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
+def binary_search_recursive(array, item, left=0, right=None):
+    # Time - O(log(n)) Space - O(1)
+    # Set to None because only want it to run once
+    if right == None:
+        right = len(array) - 1
+    middle = (left + right) // 2
+
+    # Logic: see above for logic & pseudocode
+    if array[middle] == item:
+        return middle
+    while array[middle] != item:
+        # Covers edge cases where searches go out of bounds on either left or right side
+        if middle == left or left > (len(array) - 1):
+            return None
+        # Right looking. If item is on the right side after middle lookup
+        elif array[middle] < item:
+            return binary_search_recursive(array, item, middle + 1, right)
+        # Left looking. If the item is on the left side after middle lookup
+        elif array[middle] > item:
+            return binary_search_recursive(array, item, left, middle - 1)
+    
