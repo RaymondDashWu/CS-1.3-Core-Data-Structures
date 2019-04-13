@@ -17,8 +17,6 @@ def contains(text, pattern):
     # else:
     #     return False    
 
-
-
     if len(pattern) == 0:
         return True
 
@@ -37,12 +35,6 @@ def contains(text, pattern):
             if letter == pattern[counter]:
                 counter += 1
     return False
-            
-
-                
-
-    # Recursive - ???
-
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,

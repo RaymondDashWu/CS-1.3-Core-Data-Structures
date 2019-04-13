@@ -37,9 +37,7 @@ def binary_search(array, item):
 
 
 def binary_search_iterative(array, item):
-    # TODO: implement binary search iteratively here
     # Time - O(log(n)) Space - O(1)
-    # TODO: Annotate functions with complexity analysis of running time and space (memory)
     
     # PSEUDO BRAINSTORM 2
     # check if item at middle of array is equal to item
@@ -47,42 +45,35 @@ def binary_search_iterative(array, item):
     # if greater, repeat for half in the range of middle item to end
     # if less, repeat for half in the range of beginning to middle item
     array.sort()
+    
     middle = len(array) // 2
+    left = 0
+    right = len(array) - 1
+    
+    # Logic: Look for an item by starting out with the middle of each array and then updating the range
+    # so that it looks in the middle every time.
 
+    # Ex: Looking for the name Brian in sorted list below:
+    # ["Alex", "Brian", "Julia", "Kojin", "Nabil", "Nick", "Winnie"]
+    # Middle (currently at array[3]) will point to "Kojin" and start to look to the left after comparing.
+    # In this case the following will be looked at:
+    # ["Alex", "Brian", "Julia", ...]
+    # right = middle (currently 2) - 1
+    # left = 0 (unchanged)
+    # Brian found!
     while array[middle] != item:
-        if array[middle] > item:
-            array = range(middle, (len(array) - 1))
-        elif array[middle] < item:
-            array = range(0, middle)
-    return array[middle]
-
-    # if array[middle] == item:
-    #     return middle
-    # else:
-    #     if array[middle] > item:
-    #         new_array = range(array[middle], )
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    # for index, value in enumerate(array):
-    #     if item == value:
-    #         return index
-    #     else:
-    #         if value > len(array)/2:
-    #             return index[]
-            # PSEUDO BRAINSTORM
-            # turn to decimal and compare greater or less than
-            # keep track of length of array
-            # change index to index range
-    # once implemented, change binary_search to call binary_search_iterative
-    # to verify that your iterative implementation passes all tests
+        # Covers edge cases where searches go out of bounds on either left or right side
+        if middle < 0 or left > (len(array) - 1):
+            return None
+        # Right looking. If item is on the right side after middle lookup
+        if array[middle] < item:
+            left = middle + 1
+            middle = (right - left) // 2 + left
+        # Left looking. If the item is on the left side after middle lookup
+        elif array[middle] > item:
+            right = middle - 1
+            middle = (right - left) // 2
+    return middle
 
 
 def binary_search_recursive(array, item, left=None, right=None):
