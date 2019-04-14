@@ -48,20 +48,14 @@ def find_index(text, pattern):
     # and then seeing if it matches with the first letter of pattern "a". In first
     # loop through it does not so it goes to next letter. Finds "a" in text, which matches
     # with "a" in pattern. Then checks for next letter "n" vs "n". Returns index
-    
-    # if len(pattern) == 0:
-    #     return 0
 
-    # for letter in text:
-    #     if letter == pattern:
-    #         for pattern_index in range(len(pattern)):
-    #             if pattern[pattern_index] == text[]
-                # would have to return index - n
+    if len(pattern) == 0:
+        return 0
 
     counter = 0
     goal = len(pattern)
 
-    for i, letter in enumerate(text, start = 1):
+    for i, letter in enumerate(text):
         if letter == pattern[counter]:
             counter += 1
             if counter == goal:
@@ -81,25 +75,37 @@ def find_all_indexes(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
+    if len(pattern) == 0:
+        return 0
+
+    # Used to keep track of when pattern is matched (GOAL!!!) as well as when that first pattern match is
     counter = 0
     goal = len(pattern)
-    index_list = []
+    goal_index_list = []
 
-    for i, letter in enumerate(text, start = 1):
-        print("i:", i)
-        print("pattern:", pattern)
-        print("text:", text)
-        print("index_list:", index_list)
-        if letter == pattern[0]:
+    index_dict = {}
+
+    # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
+    # When a letter in text matches the first letter of the pattern, append both to index_dict and +1 to counter
+    # When counter reaches the goal (# of letters in pattern) then append the index of the first pattern
+    # matching letter to goal_index_list
+    for i, letter in enumerate(text):
+        if letter == pattern[counter]:
             counter += 1
+            index_dict[i] = letter
             if counter == goal:
-                index_list.append(i) # Note: This line broken. Won't append with the proper number?
+                # return index_dict
+                goal_index_list.append(index_dict[pattern[0]])
+                print("goal_index_list reached:", goal_index_list)
         else:
+            # Resets the dictionary and counter after a letter has been found that doesn't match the pattern
             counter = 0
+            index_dict = {}
             if letter == pattern[counter]:
+                index_dict[i] = letter
                 counter += 1
-    return index_list
-
+    return goal_index_list
+    
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
     print('contains({!r}, {!r}) => {}'.format(text, pattern, found))
@@ -107,7 +113,7 @@ def test_string_algorithms(text, pattern):
     index = find_index(text, pattern)
     print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
     # TODO: Uncomment these lines after you implement find_all_indexes
-    indexes = find_all_indexes(text, pattern)
+    # indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 
 
