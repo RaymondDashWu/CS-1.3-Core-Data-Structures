@@ -6,6 +6,7 @@ class Node(object):
         """Initialize this node with the given data."""
         self.data = data
         self.next = None
+        self.prev = None
 
     def __repr__(self):
         """Return a string representation of this node."""
@@ -56,7 +57,8 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if the length is 0
+        Worst case running time: O(N) if there are n entries"""
         # Node counter initialized to zero
         node_count = 0
         # Start at the head node
@@ -73,8 +75,8 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: O(1) under what conditions?
-        Worst case running time: O(N) under what conditions?"""
+        Best case running time: O(1) if the first node is the one being looked for
+        Worst case running time: O(N) if the last node is the one being looked for"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
@@ -85,9 +87,10 @@ class LinkedList(object):
 
         counter = 0
         current_node = self.head
-
+    
         while counter != index:
             current_node = current_node.next
+            counter += 1
         return current_node.data
 
     def insert_at_index(self, index, item):
@@ -100,9 +103,41 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
 
+        # Edge cases using append (item at index 0)/prepend (item at index -1) functions
+        # Note: early return because prepend/append already had self.size += 1 in them
+        if index == 0:
+            return self.prepend(item)
+        elif index == self.size:
+            return self.append(item)
+        
+        # Where the actual code starts
+        new_node = Node(item)
+        prev_node = None
+        current_node = self.head
+        counter = 0
+
+        while counter != index:
+            prev_node = current_node
+            current_node = current_node.next
+            counter += 1
+        prev_node = new_node.next
+        new_node.next = current_node
+        
+        # # Doubly linked list attempt
+        # while counter != index:
+        #     current_node.next.prev = current_node
+        #     current_node = current_node.next
+        #     # current_node.prev.next = current_node.next
+        #     counter += 1
+        # current_node.next.prev = new_node
+        # new_node.next = current_node   
+                 
+        self.size += 1
+
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) have reference to a tail element
+        Worst case running time: O(1) have reference to a tail element"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -114,10 +149,12 @@ class LinkedList(object):
             self.tail.next = new_node
         # Update tail to new node regardless
         self.tail = new_node
+        self.size += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) have reference to a head element
+        Worst case running time: O(1) have reference to a head element"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -129,6 +166,7 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
+        self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -159,8 +197,8 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) the node we're looking to delete is the first one
+        Worst case running time: O(n) the node we're looking to delete is the nth one"""
         # Start at the head node
         node = self.head
         # Keep track of the node before the one containing the given item
@@ -199,6 +237,7 @@ class LinkedList(object):
                     previous.next = None
                 # Update tail to the previous node regardless
                 self.tail = previous
+            self.size -= 1
         else:
             # Otherwise raise an error to tell the user that delete has failed
             raise ValueError('Item not found: {}'.format(item))
