@@ -101,7 +101,6 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
 
         # Edge cases using append (item at index 0)/prepend (item at index -1) functions
         # Note: early return because prepend/append already had self.size += 1 in them
@@ -190,11 +189,44 @@ class LinkedList(object):
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
         using the same node, or raise ValueError if old_item is not found.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
-        # TODO: Find the node containing the given old_item and replace its
-        # data with new_item, without creating a new node object
-        pass
+        Best case running time: O(1) in any of the following scenarios: linkedlist is empty,
+        data to be replaced is at the head or tail, or data to be replaced is the first item in linked list
+        Worst case running time: O(N) item to be replaced is at the Nth position"""
+        
+        # PSEUDO BRAINSTORM
+        # Iterate through nodes using .next . If node is equal to old_item, replace with new_item using .data
+        # How to find size?
+        # account for empty
+
+        # Added for speed increase for certain scenarios
+        if self.is_empty():
+            raise ValueError('Linked list is empty')
+        if self.head.data == old_item:
+            self.head.data = new_item
+            return self.head
+        if self.tail.data == old_item:
+            self.tail.data = new_item
+            return self.tail
+        
+        # Removed because it adds more time complexity. Replaced with catch-all at end
+        # if self.find(lambda item: item == old_item) == None:
+        #     raise ValueError('Data not found: {}'.format(old_item))
+
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.data == old_item:
+                current_node.data = new_item
+                return current_node
+            current_node = current_node.next
+        # Used as a catch-all for scenarios where linked list is empty and data not in linked list
+        raise ValueError('Data not found: {}'.format(old_item))
+
+        # WHY THIS NO WORKIE!!??? How to get it to return the node rather than data in node?
+        # while found == False:
+        #     found_node = self.find(lambda item: item == old_item)
+        #     found_node.data = new_item.data
+        #     found = True
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
