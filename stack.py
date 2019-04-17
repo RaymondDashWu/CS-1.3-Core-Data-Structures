@@ -68,18 +68,15 @@ class ArrayStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        # TODO: Check if empty
         return len(self.list) == 0
 
     def length(self):
         """Return the number of items in this stack."""
-        # TODO: Count number of items
         return len(self.list)
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
-        # TODO: Insert given item
+        Running time: O(1) – arrays have access to last list element"""
         self.list.append(item)
 
     def peek(self):
@@ -88,12 +85,11 @@ class ArrayStack(object):
         if self.is_empty():
             return None
         return self.list[-1]
-        # TODO: Return top item, if any
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – Arrays have access to last element in list"""
         if self.is_empty():
             raise ValueError("List be empty!")
         else:
