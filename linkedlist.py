@@ -115,23 +115,24 @@ class LinkedList(object):
         current_node = self.head
         counter = 0
 
-        # Singly linked list
+        # # Singly linked list
+        # while counter != index:
+        #     prev_node = current_node
+        #     current_node = current_node.next
+        #     counter += 1
+        # prev_node = new_node.next
+        # new_node.next = current_node
+        
+        # Doubly linked list attempt. DOES NOT WORK
         while counter != index:
-            prev_node = current_node
             current_node = current_node.next
             counter += 1
-        prev_node = new_node.next
-        new_node.next = current_node
-        
-        # # Doubly linked list attempt. DOES NOT WORK
-        # while counter != index:
-        #     current_node.next.prev = current_node
-        #     current_node = current_node.next
-        #     # current_node.prev.next = current_node.next
-        #     counter += 1
-        # current_node.next.prev = new_node
-        # new_node.next = current_node   
-                 
+            print(current_node)
+            print(current_node.prev)
+        new_node.prev = current_node.prev
+        new_node.next = current_node 
+        current_node.prev.next = new_node
+        current_node.prev = new_node
         self.size += 1
 
     def append(self, item):
@@ -147,6 +148,7 @@ class LinkedList(object):
         else:
             # Otherwise insert new node after tail
             self.tail.next = new_node
+            new_node.prev = self.tail
         # Update tail to new node regardless
         self.tail = new_node
         self.size += 1
@@ -164,6 +166,7 @@ class LinkedList(object):
         else:
             # Otherwise insert new node before head
             new_node.next = self.head
+            self.head.prev = new_node
         # Update head to new node regardless
         self.head = new_node
         self.size += 1
@@ -197,13 +200,15 @@ class LinkedList(object):
         # Iterate through nodes using .next . If node is equal to old_item, replace with new_item using .data
         # How to find size?
         # account for empty
+        
+        # Not necessary. These will already be O(1) operations
+        # if self.is_empty():
+        #     raise ValueError('Linked list is empty')
+        # if self.head.data == old_item:
+        #     self.head.data = new_item
+        #     return self.head
 
         # Added for speed increase for certain scenarios
-        if self.is_empty():
-            raise ValueError('Linked list is empty')
-        if self.head.data == old_item:
-            self.head.data = new_item
-            return self.head
         if self.tail.data == old_item:
             self.tail.data = new_item
             return self.tail
