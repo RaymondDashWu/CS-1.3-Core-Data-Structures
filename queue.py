@@ -1,5 +1,6 @@
 #!python
-
+# Annotated class worksheet
+# https://photos.app.goo.gl/y9posmxTuAxrwDP87
 from linkedlist import LinkedList
 
 
