@@ -54,15 +54,20 @@ def find_index(text, pattern):
 
     counter = 0
     goal = len(pattern)
+    goal_index_list = []
 
     for i, letter in enumerate(text):
         if letter == pattern[counter]:
+            if goal_index_list == []:
+                goal_index_list = i
             counter += 1
-            if counter == goal:
-                return i
+            if counter >= goal:
+                return goal_index_list
         else:
             counter = 0
+            goal_index_list = []
             if letter == pattern[counter]:
+                goal_index_list = i
                 counter += 1
 
     

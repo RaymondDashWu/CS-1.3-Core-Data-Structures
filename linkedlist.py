@@ -123,7 +123,7 @@ class LinkedList(object):
         # prev_node = new_node.next
         # new_node.next = current_node
         
-        # Doubly linked list attempt. DOES NOT WORK
+        # Doubly linked list
         while counter != index:
             current_node = current_node.next
             counter += 1

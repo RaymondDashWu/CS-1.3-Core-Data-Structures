@@ -42,7 +42,7 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(1) – we're deleting self.tail, a node we have access to"""
+        Running time: O(n) – deletes from tail. However, has to traverse all nodes"""
         if self.is_empty():
             raise ValueError("This stack be empty!")
         else:
