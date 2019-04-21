@@ -103,7 +103,7 @@ def find_all_indexes(text, pattern):
         return goal_index_list
 
     # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
-    # When a letter in text matches the first letter of the pattern, append both to index_dict and +1 to counter
+    # When a letter in text matches the first letter of the pattern, append both to goal_index_list and +1 to counter
     # When counter reaches the goal (# of letters in pattern) then append the index of the first pattern
     # matching letter to goal_index_list
     for i, letter in enumerate(text):
@@ -117,8 +117,11 @@ def find_all_indexes(text, pattern):
                 counter = 0
                 goal_index = None
                 if letter == pattern[counter]:
-                    goal_index = i
-                    counter += 1
+                    # special condition for case where the pattern match would be 1. If it is, you get
+                    # index out of range errors. That's why code only runs when len(pattern) != 1
+                    if len(pattern) != 1:
+                        counter += 1
+                        goal_index = i
         else:
             # Reset if it loops through a letter that doesn't match. Ex: "aaabc" looking for "ab" would add
             # an "a" but reset on the second "a" because it doesn't match "ab"
