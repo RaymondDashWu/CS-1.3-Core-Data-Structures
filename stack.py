@@ -1,5 +1,6 @@
 #!python
-
+# Annotated class worksheet
+# https://photos.app.goo.gl/y9posmxTuAxrwDP87
 from linkedlist import LinkedList
 
 
@@ -34,7 +35,9 @@ class LinkedStack(object):
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
-        or None if this stack is empty."""
+        or None if this stack is empty.
+        Running time: O(1) – access tail.data"""
+        
         if self.is_empty():
             return None
         return self.list.tail.data
@@ -42,7 +45,8 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(n) – deletes from tail. However, has to traverse all nodes"""
+        Running time: O(n) – deletes from tail. However, has to traverse all nodes
+        Note: To change to O(1) run time, top of stack should be head of list. Then just delete from head"""
         if self.is_empty():
             raise ValueError("This stack be empty!")
         else:

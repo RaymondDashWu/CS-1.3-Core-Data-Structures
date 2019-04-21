@@ -92,7 +92,7 @@ class ArrayQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(1) – Caling on the pop operation is constant time"""
+        Running time: O(n) – popping from the front requires all indexes to be moved forward / renumbered"""
         if self.is_empty():
             raise ValueError("This list be mad empty yo!")
         else:

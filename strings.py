@@ -52,11 +52,16 @@ def find_index(text, pattern):
     if len(pattern) == 0:
         return 0
 
+    # Used to keep track of when pattern is matched (GOAL!!!) as well as when that first pattern match is
     counter = 0
     goal = len(pattern)
     # Keeps track of the index at which the first letter that matches is found
     goal_index_list = []
 
+    # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
+    # When a letter in text matches the first letter of the pattern, append both to goal_index_list and +1 to counter
+    # When counter reaches the goal (# of letters in pattern) then append the index of the first pattern
+    # matching letter to goal_index_list
     for i, letter in enumerate(text):
         if letter == pattern[counter]:
             # Adds the first character to index
@@ -70,6 +75,7 @@ def find_index(text, pattern):
             # Reset if it loops through a letter that doesn't match. Ex: "aaabc" looking for "ab" would add
             # an "a" but reset on the second "a" because it doesn't match ab
             goal_index_list = []
+            # if cases like "ababc" where the third letter doesn't match but can overlap with the string being looked for
             if letter == pattern[counter]:
                 goal_index_list = i
                 counter += 1
@@ -84,15 +90,17 @@ def find_all_indexes(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
-    if len(pattern) == 0:
-        return 0
-
     # Used to keep track of when pattern is matched (GOAL!!!) as well as when that first pattern match is
     counter = 0
     goal = len(pattern)
+    # Keeps track of the index at which the first letter that matches is found
+    goal_index = None
     goal_index_list = []
 
-    index_dict = {}
+    if len(pattern) == 0:
+        for i in range(len(text)):
+            goal_index_list.append(i)
+        return goal_index_list
 
     # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
     # When a letter in text matches the first letter of the pattern, append both to index_dict and +1 to counter
@@ -100,18 +108,25 @@ def find_all_indexes(text, pattern):
     # matching letter to goal_index_list
     for i, letter in enumerate(text):
         if letter == pattern[counter]:
+            # Adds the first character to index
+            if goal_index == None:
+                goal_index = i
             counter += 1
-            index_dict[i] = letter
             if counter == goal:
-                # return index_dict
-                goal_index_list.append(index_dict[pattern[0]])
-                print("goal_index_list reached:", goal_index_list)
+                goal_index_list.append(goal_index)
+                counter = 0
+                goal_index = None
+                if letter == pattern[counter]:
+                    goal_index = i
+                    counter += 1
         else:
-            # Resets the dictionary and counter after a letter has been found that doesn't match the pattern
+            # Reset if it loops through a letter that doesn't match. Ex: "aaabc" looking for "ab" would add
+            # an "a" but reset on the second "a" because it doesn't match "ab"
             counter = 0
-            index_dict = {}
+            goal_index = None
+            # if cases like "ababc" where the third letter doesn't match but can overlap with the string being looked for
             if letter == pattern[counter]:
-                index_dict[i] = letter
+                goal_index = i
                 counter += 1
     return goal_index_list
     
