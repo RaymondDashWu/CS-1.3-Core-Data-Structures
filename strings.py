@@ -54,17 +54,21 @@ def find_index(text, pattern):
 
     counter = 0
     goal = len(pattern)
+    # Keeps track of the index at which the first letter that matches is found
     goal_index_list = []
 
     for i, letter in enumerate(text):
         if letter == pattern[counter]:
+            # Adds the first character to index
             if goal_index_list == []:
                 goal_index_list = i
             counter += 1
-            if counter >= goal:
+            if counter == goal:
                 return goal_index_list
         else:
             counter = 0
+            # Reset if it loops through a letter that doesn't match. Ex: "aaabc" looking for "ab" would add
+            # an "a" but reset on the second "a" because it doesn't match ab
             goal_index_list = []
             if letter == pattern[counter]:
                 goal_index_list = i
