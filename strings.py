@@ -12,36 +12,42 @@ def contains(text, pattern):
     # loop through it does not so it goes to next letter. Finds "a" in text, which matches
     # with "a" in pattern. Then checks for next letter "n" vs "n". Returns index
 
+    found = find_all_indexes(text, pattern)
+    if found:
+        return True
+    else:
+        return False
+
+    # Commented out for refactor
     # if pattern in text:
     #     return True
     # else:
     #     return False    
 
-    if len(pattern) == 0:
-        return True
+    # if len(pattern) == 0:
+    #     return True
 
-    counter = 0 # counts pattern
-    goal = len(pattern) # Once counter == goal, return True
+    # counter = 0 # counts pattern
+    # goal = len(pattern) # Once counter == goal, return True
 
-    # Logic: Compare text with first letter in pattern. If matches, then counter + 1. 
-    # If counter reaches same number as goal then return True
-    for letter in text:
-        if letter == pattern[counter]:
-            counter += 1
-            if counter == goal:
-                return True
-        else:
-            counter = 0
-            if letter == pattern[counter]:
-                counter += 1
-    return False
+    # # Logic: Compare text with first letter in pattern. If matches, then counter + 1. 
+    # # If counter reaches same number as goal then return True
+    # for letter in text:
+    #     if letter == pattern[counter]:
+    #         counter += 1
+    #         if counter == goal:
+    #             return True
+    #     else:
+    #         counter = 0
+    #         if letter == pattern[counter]:
+    #             counter += 1
+    # return False
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
     # PSEUDO BRAINSTORM
     # Iterate through letters in text and pattern, comparing patterns
     # Ex: in "banana" looking for "an". Would look at first letter of text - "b"
@@ -49,39 +55,42 @@ def find_index(text, pattern):
     # loop through it does not so it goes to next letter. Finds "a" in text, which matches
     # with "a" in pattern. Then checks for next letter "n" vs "n". Returns index
 
-    if len(pattern) == 0:
-        return 0
+    found = find_all_indexes(text, pattern)
+    if len(found) > 0:
+        return found[0]
+    return None
 
-    # Used to keep track of when pattern is matched (GOAL!!!) as well as when that first pattern match is
-    counter = 0
-    goal = len(pattern)
-    # Keeps track of the index at which the first letter that matches is found
-    goal_index_list = []
+    # Commented out for refactor
+    # if len(pattern) == 0:
+    #     return 0
 
-    # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
-    # When a letter in text matches the first letter of the pattern, append both to goal_index_list and +1 to counter
-    # When counter reaches the goal (# of letters in pattern) then append the index of the first pattern
-    # matching letter to goal_index_list
-    for i, letter in enumerate(text):
-        if letter == pattern[counter]:
-            # Adds the first character to index
-            if goal_index_list == []:
-                goal_index_list = i
-            counter += 1
-            if counter == goal:
-                return goal_index_list
-        else:
-            counter = 0
-            # Reset if it loops through a letter that doesn't match. Ex: "aaabc" looking for "ab" would add
-            # an "a" but reset on the second "a" because it doesn't match ab
-            goal_index_list = []
-            # if cases like "ababc" where the third letter doesn't match but can overlap with the string being looked for
-            if letter == pattern[counter]:
-                goal_index_list = i
-                counter += 1
+    # # Used to keep track of when pattern is matched (GOAL!!!) as well as when that first pattern match is
+    # counter = 0
+    # goal = len(pattern)
+    # # Keeps track of the index at which the first letter that matches is found
+    # goal_index_list = []
 
-    
-
+    # # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
+    # # When a letter in text matches the first letter of the pattern, append both to goal_index_list and +1 to counter
+    # # When counter reaches the goal (# of letters in pattern) then append the index of the first pattern
+    # # matching letter to goal_index_list
+    # for i, letter in enumerate(text):
+    #     if letter == pattern[counter]:
+    #         # Adds the first character to index
+    #         if goal_index_list == []:
+    #             goal_index_list = i
+    #         counter += 1
+    #         if counter == goal:
+    #             return goal_index_list
+    #     else:
+    #         counter = 0
+    #         # Reset if it loops through a letter that doesn't match. Ex: "aaabc" looking for "ab" would add
+    #         # an "a" but reset on the second "a" because it doesn't match ab
+    #         goal_index_list = []
+    #         # if cases like "ababc" where the third letter doesn't match but can overlap with the string being looked for
+    #         if letter == pattern[counter]:
+    #             goal_index_list = i
+    #             counter += 1
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
@@ -98,9 +107,7 @@ def find_all_indexes(text, pattern):
     goal_index_list = []
 
     if len(pattern) == 0:
-        for i in range(len(text)):
-            goal_index_list.append(i)
-        return goal_index_list
+        return list(range(0, len(text)))
 
     # Logic: enumerate allows for keeping track of the letters that match the pattern as well as the index.
     # When a letter in text matches the first letter of the pattern, append both to goal_index_list and +1 to counter
