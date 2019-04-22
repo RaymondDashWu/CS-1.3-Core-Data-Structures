@@ -2,6 +2,8 @@
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text.
+    Time Complexity: O(n) - find_all_indexes iterates through text once
+    Space Complexity: O(n) - find_all_indexes keeps track of all indexes
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
@@ -46,7 +48,10 @@ def contains(text, pattern):
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found."""
+    or None if not found.
+    Time Complexity: O(n) - find_all_indexes iterates through text once
+    Space Complexity: O(n) - find_all_indexes keeps track of all indexes
+    """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # PSEUDO BRAINSTORM
@@ -95,10 +100,12 @@ def find_index(text, pattern):
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found."""
+    or an empty list if not found.
+    Time Complexity: O(n) - find_all_indexes iterates through text once
+    Space Complexity: O(n) - find_all_indexes keeps track of all indexes
+    """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
     # Used to keep track of when pattern is matched (GOAL!!!) as well as when that first pattern match is
     counter = 0
@@ -148,7 +155,7 @@ def test_string_algorithms(text, pattern):
     index = find_index(text, pattern)
     print('find_index({!r}, {!r}) => {}'.format(text, pattern, index))
     # TODO: Uncomment these lines after you implement find_all_indexes
-    # indexes = find_all_indexes(text, pattern)
+    indexes = find_all_indexes(text, pattern)
     print('find_all_indexes({!r}, {!r}) => {}'.format(text, pattern, indexes))
 
 
