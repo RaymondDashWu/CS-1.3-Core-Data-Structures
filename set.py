@@ -17,7 +17,7 @@ class Set(object):
         """Return a string representation of this hash table."""
         return 'Set({!r})'.format(self.hashtable.items())
 
-    # functions within the set
+    # functions that do stuff within the set class
     def contains(self,element):
         # return a boolean indicating whether element is in this set
         return self.hashtable.contains(element)
@@ -25,7 +25,7 @@ class Set(object):
     def add(self, element):
         # add element to this set, if not present already
         if self.contains(element) != True:
-            self.hashtable.set(None, element) # key, value
+            self.hashtable.set(element, None) # key, value
         else:
             return "Element not found"
 
@@ -37,15 +37,40 @@ class Set(object):
 
     def union(self, other_set):
         # return a new set that is the union of this set and other_set
-        pass #[TODO]
+        # TODO: change to key because in order to find the value, you need to use the key
+        first_set = Set(self.hashtable.keys())
+
+        for element in other_set:
+            first_set.add(element)
+        return first_set
 
     def intersection(self, other_set):
         # return a new set that is the intersection of this set and other_set
-        pass #[TODO]
+        # first_set = Set(self.hashtable.keys())
+        intersected_set = Set()
+
+        other_set_copy = other_set.copy.deepcopy()
+
+        # need to make other_set copy so that other_set element isn't deleted
+        for element in intersected_set.hashtable.keys():
+            if self.contains(element):
+                intersected_set.add(element)
+        # TODO - compare sizes of the sets. Smaller goes into bigger to go through fewer elements
+
+        for element in other_set.hashtable.keys():
+            if first_set.contains(other_set[element]):
+                intersected_set.add(element)
+        return intersected_set
 
     def difference(self, other_set):
         # return a new set that is the difference of this set and other_set
-        pass #[TODO]
+        first_set = Set(self.hashtable.values())
+        difference_set = Set()
+
+        for element in other_set:
+            if first_set.contains(other_set[element]):
+                first_set.remove(element)
+        return difference_set
     
     def is_subset(self, other_set):
         # return a boolean indicating whether other_set is a subset of this set
@@ -53,51 +78,53 @@ class Set(object):
 
 
 # [TODO] Change testing function
-def test_hash_table():
-    ht = HashTable(4)
-    print('HashTable: ' + str(ht))
+def test_set_functions():
+    st = Set(4)
+    print("Set:" + str(st))
 
-    print('Setting entries:')
-    ht.set('I', 1)
-    print('set(I, 1): ' + str(ht))
-    ht.set('V', 5)
-    print('set(V, 5): ' + str(ht))
-    print('size: ' + str(ht.size))
-    print('length: ' + str(ht.length()))
-    print('buckets: ' + str(len(ht.buckets)))
-    print('load_factor: ' + str(ht.load_factor()))
-    ht.set('X', 10)
-    print('set(X, 10): ' + str(ht))
-    ht.set('L', 50)  # Should trigger resize
-    print('set(L, 50): ' + str(ht))
-    print('size: ' + str(ht.size))
-    print('length: ' + str(ht.length()))
-    print('buckets: ' + str(len(ht.buckets)))
-    print('load_factor: ' + str(ht.load_factor()))
+    # ht = HashTable(4)
+    # print('HashTable: ' + str(ht))
 
-    print('Getting entries:')
-    print('get(I): ' + str(ht.get('I')))
-    print('get(V): ' + str(ht.get('V')))
-    print('get(X): ' + str(ht.get('X')))
-    print('get(L): ' + str(ht.get('L')))
-    print('contains(X): ' + str(ht.contains('X')))
-    print('contains(Z): ' + str(ht.contains('Z')))
+    # print('Setting entries:')
+    # ht.set('I', 1)
+    # print('set(I, 1): ' + str(ht))
+    # ht.set('V', 5)
+    # print('set(V, 5): ' + str(ht))
+    # print('size: ' + str(ht.size))
+    # print('length: ' + str(ht.length()))
+    # print('buckets: ' + str(len(ht.buckets)))
+    # print('load_factor: ' + str(ht.load_factor()))
+    # ht.set('X', 10)
+    # print('set(X, 10): ' + str(ht))
+    # ht.set('L', 50)  # Should trigger resize
+    # print('set(L, 50): ' + str(ht))
+    # print('size: ' + str(ht.size))
+    # print('length: ' + str(ht.length()))
+    # print('buckets: ' + str(len(ht.buckets)))
+    # print('load_factor: ' + str(ht.load_factor()))
 
-    print('Deleting entries:')
-    ht.delete('I')
-    print('delete(I): ' + str(ht))
-    ht.delete('V')
-    print('delete(V): ' + str(ht))
-    ht.delete('X')
-    print('delete(X): ' + str(ht))
-    ht.delete('L')
-    print('delete(L): ' + str(ht))
-    print('contains(X): ' + str(ht.contains('X')))
-    print('size: ' + str(ht.size))
-    print('length: ' + str(ht.length()))
-    print('buckets: ' + str(len(ht.buckets)))
-    print('load_factor: ' + str(ht.load_factor()))
+    # print('Getting entries:')
+    # print('get(I): ' + str(ht.get('I')))
+    # print('get(V): ' + str(ht.get('V')))
+    # print('get(X): ' + str(ht.get('X')))
+    # print('get(L): ' + str(ht.get('L')))
+    # print('contains(X): ' + str(ht.contains('X')))
+    # print('contains(Z): ' + str(ht.contains('Z')))
 
+    # print('Deleting entries:')
+    # ht.delete('I')
+    # print('delete(I): ' + str(ht))
+    # ht.delete('V')
+    # print('delete(V): ' + str(ht))
+    # ht.delete('X')
+    # print('delete(X): ' + str(ht))
+    # ht.delete('L')
+    # print('delete(L): ' + str(ht))
+    # print('contains(X): ' + str(ht.contains('X')))
+    # print('size: ' + str(ht.size))
+    # print('length: ' + str(ht.length()))
+    # print('buckets: ' + str(len(ht.buckets)))
+    # print('load_factor: ' + str(ht.load_factor()))
 
 if __name__ == '__main__':
-    test_hash_table()
+    test_set_functions()
