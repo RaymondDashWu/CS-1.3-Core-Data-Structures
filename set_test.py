@@ -40,7 +40,10 @@ class SetTest(unittest.TestCase):
         st1 = Set(['UO2', 'CaCO3', 'SiO2'])
         st2 = Set(['UO2', 'Ca5(PO4)3F', 'SiO2'])
         st_union = st1.union(st2)
-
+        assert st_union.contains('UO2') == True
+        assert st_union.contains('CaCO3') == True
+        assert st_union.contains('SiO2') == True
+        assert st_union.contains('Ca5(PO4)3F') == True
         assert st_union.hashtable.size == 4
 
 

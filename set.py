@@ -4,7 +4,7 @@ from hashtable import HashTable
 
 class Set(object):
     def __init__(self, elements = None):
-        self.hashtable = HashTable()
+        self.hashtable = HashTable() # Should this be []?
         self.size = self.hashtable.size
 
         if elements != None:
@@ -42,16 +42,14 @@ class Set(object):
 
     def union(self, other_set):
         # return a new set that is the union of this set and other_set
-        # TODO: change to key because in order to find the value, you need to use the key
-        first_set = Set(self)
+        union_set = Set(self.hashtable.keys())
 
-        for element in other_set:
-            first_set.add(element)
-        return first_set
+        for element in other_set.hashtable.keys():
+            union_set.add(element)
+        return union_set
 
     def intersection(self, other_set):
         # return a new set that is the intersection of this set and other_set
-        # first_set = Set(self.hashtable.keys())
         intersected_set = Set()
 
         other_set_copy = other_set.copy.deepcopy()
