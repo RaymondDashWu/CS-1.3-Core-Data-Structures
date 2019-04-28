@@ -1,12 +1,15 @@
 #!python
 
-# [TODO] Add unit tests
 from hashtable import HashTable
 
 class Set(object):
     def __init__(self, elements = None):
         self.hashtable = HashTable()
-        # size already implemented in HashTable
+        self.size = self.hashtable.size
+
+        if elements != None:
+            for element in elements:
+                self.add(element)
 
     def __str__(self):
         """Return a formatted string representation of this hash table."""
@@ -27,18 +30,20 @@ class Set(object):
         if self.contains(element) != True:
             self.hashtable.set(element, None) # key, value
         else:
-            return "Element not found"
+            return "Element be missing!"
 
     def remove(self, element):
         # remove element from this set, if present, or else raise KeyError
         if self.contains(element):
             self.hashtable.delete(element)
+        else:
+            raise KeyError('Element be missing!')
         # Error handling done in hashtable delete function
 
     def union(self, other_set):
         # return a new set that is the union of this set and other_set
         # TODO: change to key because in order to find the value, you need to use the key
-        first_set = Set(self.hashtable.keys())
+        first_set = Set(self)
 
         for element in other_set:
             first_set.add(element)
@@ -75,56 +80,3 @@ class Set(object):
     def is_subset(self, other_set):
         # return a boolean indicating whether other_set is a subset of this set
         pass #[TODO]
-
-
-# [TODO] Change testing function
-def test_set_functions():
-    st = Set(4)
-    print("Set:" + str(st))
-
-    # ht = HashTable(4)
-    # print('HashTable: ' + str(ht))
-
-    # print('Setting entries:')
-    # ht.set('I', 1)
-    # print('set(I, 1): ' + str(ht))
-    # ht.set('V', 5)
-    # print('set(V, 5): ' + str(ht))
-    # print('size: ' + str(ht.size))
-    # print('length: ' + str(ht.length()))
-    # print('buckets: ' + str(len(ht.buckets)))
-    # print('load_factor: ' + str(ht.load_factor()))
-    # ht.set('X', 10)
-    # print('set(X, 10): ' + str(ht))
-    # ht.set('L', 50)  # Should trigger resize
-    # print('set(L, 50): ' + str(ht))
-    # print('size: ' + str(ht.size))
-    # print('length: ' + str(ht.length()))
-    # print('buckets: ' + str(len(ht.buckets)))
-    # print('load_factor: ' + str(ht.load_factor()))
-
-    # print('Getting entries:')
-    # print('get(I): ' + str(ht.get('I')))
-    # print('get(V): ' + str(ht.get('V')))
-    # print('get(X): ' + str(ht.get('X')))
-    # print('get(L): ' + str(ht.get('L')))
-    # print('contains(X): ' + str(ht.contains('X')))
-    # print('contains(Z): ' + str(ht.contains('Z')))
-
-    # print('Deleting entries:')
-    # ht.delete('I')
-    # print('delete(I): ' + str(ht))
-    # ht.delete('V')
-    # print('delete(V): ' + str(ht))
-    # ht.delete('X')
-    # print('delete(X): ' + str(ht))
-    # ht.delete('L')
-    # print('delete(L): ' + str(ht))
-    # print('contains(X): ' + str(ht.contains('X')))
-    # print('size: ' + str(ht.size))
-    # print('length: ' + str(ht.length()))
-    # print('buckets: ' + str(len(ht.buckets)))
-    # print('load_factor: ' + str(ht.load_factor()))
-
-if __name__ == '__main__':
-    test_set_functions()
