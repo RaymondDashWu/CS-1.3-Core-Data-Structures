@@ -49,7 +49,7 @@ class Set(object):
         # return a new set that is the intersection of this set and other_set
         intersected_set = Set()
 
-        # Slight optimization - determine which size is smaller
+        # Slight optimization - determine which set is smaller
         if other_set.hashtable.size > self.hashtable.size:
             bigger_set = other_set
             smaller_set = self
@@ -60,15 +60,30 @@ class Set(object):
         for element in smaller_set.hashtable.keys():
             if bigger_set.contains(element):
                 intersected_set.add(element)
-            print("intersected_set:", intersected_set)
         return intersected_set
 
     def difference(self, other_set):
         # return a new set that is the difference of this set and other_set
         # PSEUDO BRAINSTORM
         # return union - intersection
-        # Once intersection function works
-        pass
+        union_set = self.union(other_set)
+        intersection_set = self.intersection(other_set)
+
+        # Slight optimization - determine which set is smaller
+        # Unsure if this is needed. Presumably intersection_set is always smaller than union? Didn't think
+        # of edge cases so this is left in here
+        if union_set.hashtable.size > intersection_set.size:
+            bigger_set = union_set
+            smaller_set = intersection_set
+        else:
+            bigger_set = intersection_set
+            smaller_set = union_set
+
+        for element in smaller_set.hashtable.keys():
+            if bigger_set.contains(element):
+                bigger_set.remove(element)
+        return bigger_set
+        
     
     def is_subset(self, other_set):
         # return a boolean indicating whether other_set is a subset of this set

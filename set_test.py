@@ -53,9 +53,20 @@ class SetTest(unittest.TestCase):
         assert st_intersection.contains('UO2') == True
         assert st_intersection.contains('SiO2') == True
         assert st_intersection.contains('Ca5(PO4)3F') == False
+        assert st_intersection.contains('CaCO3') == False
+        assert st_intersection.contains('Pb5(PO4)3Cl') == False
         assert st_intersection.hashtable.size == 2
 
-    def 
+    def test_difference(self):
+        st1 = Set(['UO2', 'CaCO3', 'SiO2'])
+        st2 = Set(['UO2', 'Ca5(PO4)3F', 'SiO2', 'Pb5(PO4)3Cl'])
+        st_difference = st1.difference(st2)
+        assert st_difference.contains('UO2') == False
+        assert st_difference.contains('SiO2') == False
+        assert st_difference.contains('Ca5(PO4)3F') == True
+        assert st_difference.contains('CaCO3') == True
+        assert st_difference.contains('Pb5(PO4)3Cl') == True
+        assert st_difference.hashtable.size == 3
 
 
 
