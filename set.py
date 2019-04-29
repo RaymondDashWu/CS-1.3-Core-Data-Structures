@@ -87,4 +87,11 @@ class Set(object):
     
     def is_subset(self, other_set):
         # return a boolean indicating whether other_set is a subset of this set
-        pass #[TODO]
+        # Note: a subset is a set which is entirely contained within another set
+
+        counter = 0
+
+        for element in other_set.hashtable.keys():
+            if self.contains(element):
+                counter += 1
+        return counter == other_set.hashtable.size
