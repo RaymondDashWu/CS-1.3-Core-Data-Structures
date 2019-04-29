@@ -22,23 +22,31 @@ class Set(object):
 
     # functions that do stuff within the set class
     def contains(self,element):
-        # return a boolean indicating whether element is in this set
+        """Returns a boolean indicating whether element is in this set
+           Time Complexity: O(L) where L is the average number of items in the bucket
+           Space Complexity: O(1) does not take up any space as it just returns an element"""
         return self.hashtable.contains(element)
 
     def add(self, element):
-        # add element to this set, if not present already
+        """Add element to this set, if not present already
+           Time Complexity: O(L) where L is the average number of items in the bucket
+           Space Complexity: O(1) does not take up any space as it just returns an element"""
         if self.contains(element) != True:
             self.hashtable.set(element, None) # key, value
 
     def remove(self, element):
-        # remove element from this set, if present, or else raise KeyError
+        """Remove element from this set, if present, or else raise KeyError
+           Time Complexity: O(L) where L is the average number of items in the bucket
+           Space Complexity: O(1) does not take up any space as it just returns an element"""
         if self.contains(element):
             self.hashtable.delete(element)
         else:
             raise KeyError('Element be missing!')
 
     def union(self, other_set):
-        # return a new set that is the union of this set and other_set
+        """Return a new set that is the union of this set and other_set
+           Time Complexity: O(n) iterating through n buckets
+           Space Complexity: O(n) as a new set is created - union_set"""
         union_set = Set(self.hashtable.keys())
 
         for element in other_set.hashtable.keys():
@@ -46,7 +54,10 @@ class Set(object):
         return union_set
 
     def intersection(self, other_set):
-        # return a new set that is the intersection of this set and other_set
+        """Return a new set that is the intersection of this set and other_set
+           Time Complexity: O(n) iterating through n buckets
+           Space Complexity: O(n) if bigger_set & smaller_set are pointers or O(n^3) if Python creates memory for bigger_set & smaller_set 
+           TODO - Research how Python assignments work"""
         intersected_set = Set()
 
         # Slight optimization - determine which set is smaller
@@ -63,7 +74,10 @@ class Set(object):
         return intersected_set
 
     def difference(self, other_set):
-        # return a new set that is the difference of this set and other_set
+        """Return a new set that is the difference of this set and other_set
+           Time Complexity: O(n) iterating through n buckets
+           Space Complexity: O(n) if bigger_set & smaller_set are pointers or O(n^3) if Python creates memory for bigger_set & smaller_set 
+           TODO - Research how Python assignments work"""
         # PSEUDO BRAINSTORM
         # return union - intersection
         union_set = self.union(other_set)
@@ -86,7 +100,9 @@ class Set(object):
         
     
     def is_subset(self, other_set):
-        # return a boolean indicating whether other_set is a subset of this set
+        """Return a boolean indicating whether other_set is a subset of this set
+           Time Complexity: O(n) iterating through n buckets
+           Space Complexity: O(1) only one variable will ever be created - counter"""
         # Note: a subset is a set which is entirely contained within another set
 
         counter = 0
