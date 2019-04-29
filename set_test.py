@@ -46,6 +46,17 @@ class SetTest(unittest.TestCase):
         assert st_union.contains('Ca5(PO4)3F') == True
         assert st_union.hashtable.size == 4
 
+    def test_intersection(self):
+        st1 = Set(['UO2', 'CaCO3', 'SiO2'])
+        st2 = Set(['UO2', 'Ca5(PO4)3F', 'SiO2', 'Pb5(PO4)3Cl'])
+        st_intersection = st1.intersection(st2)
+        assert st_intersection.contains('UO2') == True
+        assert st_intersection.contains('SiO2') == True
+        assert st_intersection.contains('Ca5(PO4)3F') == False
+        assert st_intersection.hashtable.size == 2
+
+    def 
+
 
 
 

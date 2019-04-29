@@ -4,7 +4,7 @@ from hashtable import HashTable
 
 class Set(object):
     def __init__(self, elements = None):
-        self.hashtable = HashTable() # Should this be []?
+        self.hashtable = HashTable()
         self.size = self.hashtable.size
 
         if elements != None:
@@ -29,8 +29,6 @@ class Set(object):
         # add element to this set, if not present already
         if self.contains(element) != True:
             self.hashtable.set(element, None) # key, value
-        else:
-            return "Element be missing!"
 
     def remove(self, element):
         # remove element from this set, if present, or else raise KeyError
@@ -38,7 +36,6 @@ class Set(object):
             self.hashtable.delete(element)
         else:
             raise KeyError('Element be missing!')
-        # Error handling done in hashtable delete function
 
     def union(self, other_set):
         # return a new set that is the union of this set and other_set
@@ -52,28 +49,26 @@ class Set(object):
         # return a new set that is the intersection of this set and other_set
         intersected_set = Set()
 
-        other_set_copy = other_set.copy.deepcopy()
+        # Slight optimization - determine which size is smaller
+        if other_set.hashtable.size > self.hashtable.size:
+            bigger_set = other_set
+            smaller_set = self
+        else:
+            bigger_set = self
+            smaller_set = other_set
 
-        # need to make other_set copy so that other_set element isn't deleted
-        for element in intersected_set.hashtable.keys():
-            if self.contains(element):
+        for element in smaller_set.hashtable.keys():
+            if bigger_set.contains(element):
                 intersected_set.add(element)
-        # TODO - compare sizes of the sets. Smaller goes into bigger to go through fewer elements
-
-        for element in other_set.hashtable.keys():
-            if first_set.contains(other_set[element]):
-                intersected_set.add(element)
+            print("intersected_set:", intersected_set)
         return intersected_set
 
     def difference(self, other_set):
         # return a new set that is the difference of this set and other_set
-        first_set = Set(self.hashtable.values())
-        difference_set = Set()
-
-        for element in other_set:
-            if first_set.contains(other_set[element]):
-                first_set.remove(element)
-        return difference_set
+        # PSEUDO BRAINSTORM
+        # return union - intersection
+        # Once intersection function works
+        pass
     
     def is_subset(self, other_set):
         # return a boolean indicating whether other_set is a subset of this set
