@@ -234,6 +234,7 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree in-order from root, appending each node's item
+            # items.append uncalled function that you can later call
             self._traverse_in_order_recursive(self.root, items.append)
         # Return in-order list of all items in tree
         return items
@@ -242,14 +243,14 @@ class BinarySearchTree(object):
         """Traverse this binary tree with recursive in-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         Running time: O(n) visit function goes through every node
-        Memory usage: O(1) function does not store any data"""
+        Memory usage: depends on height - O(log[base2]n) best case | O(n) if unbalanced tree"""
         # Traverse left subtree, if it exists
         if node.left:
             self._traverse_in_order_recursive(node.left, visit)
             
         # Visit this node's data with given function
         # Note: visit is a built in python function 
-        # https://docs.python.org/3/library/ast.html
+        # https://docs.python.org/3/library/ast.html#ast.NodeVisitor
         visit(node.data)
 
         # Traverse right subtree, if it exists
@@ -276,10 +277,10 @@ class BinarySearchTree(object):
         """Traverse this binary tree with recursive pre-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         Running time: O(n) visit function goes through every node
-        Memory usage: O(1) function does not store any data"""
+        Memory usage: depends on height - O(log[base2]n) best case | O(n) if unbalanced tree"""
         # Visit this node's data with given function
         # Note: visit is a built in python function 
-        # https://docs.python.org/3/library/ast.html
+        # https://docs.python.org/3/library/ast.html#ast.NodeVisitor
         visit(node.data)
         # Traverse left subtree, if it exists
         if node.left:
@@ -308,7 +309,7 @@ class BinarySearchTree(object):
         """Traverse this binary tree with recursive post-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         Running time: O(n) visit function goes through every node
-        Memory usage: O(1) function does not store any data"""
+        Memory usage: depends on height - O(log[base2]n) best case | O(n) if unbalanced tree"""
         # Traverse left subtree, if it exists
         if node.left:
             self._traverse_post_order_recursive(node.left, visit)
@@ -317,7 +318,7 @@ class BinarySearchTree(object):
             self._traverse_post_order_recursive(node.right, visit)
         # Visit this node's data with given function
         # Note: visit is a built in python function 
-        # https://docs.python.org/3/library/ast.html
+        # https://docs.python.org/3/library/ast.html#ast.NodeVisitor
         visit(node.data)
 
     # def _traverse_post_order_iterative(self, node, visit):
@@ -352,7 +353,7 @@ class BinarySearchTree(object):
             node = queue.dequeue()
             # Visit this node's data with given function
             # Note: visit is a built in python function 
-            # https://docs.python.org/3/library/ast.html
+            # https://docs.python.org/3/library/ast.html#ast.NodeVisitor
             visit(node.data)
             # Enqueue this node's left child, if it exists
             if node.left:
