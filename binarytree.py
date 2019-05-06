@@ -341,7 +341,7 @@ class BinarySearchTree(object):
         """Traverse this binary tree with iterative level-order traversal (BFS).
         Start at the given node and visit each node with the given function.
         Running time: O(n) iterates through all nodes
-        Memory usage: O(n) stores all nodes in a queue"""
+        Memory usage: O(n) or 2^(h + 1) - 1 or 2^(log[base2]n). Height is logarithmic to number of nodes. However, 2 and logbase2 cancel out so left with n"""
         from queue import LinkedQueue
         # Create queue to store nodes not yet traversed in level-order
         queue = LinkedQueue()
