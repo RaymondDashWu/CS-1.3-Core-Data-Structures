@@ -218,15 +218,15 @@ class BinarySearchTree(object):
             # Recursively descend to the node's right child, if it exists
             return self._find_parent_node_recursive(item, node.right, node)  # Hint: Remember to update the parent parameter
 
-    def delete(self, item):
-        """Remove given item from this tree, if present, or raise ValueError.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
-        # TODO: Use helper methods and break this algorithm down into 3 cases
-        # based on how many children the node containing the given item has and
-        # implement new helper methods for subtasks of the more complex cases
+    # def delete(self, item):
+    #     """Remove given item from this tree, if present, or raise ValueError.
+    #     TODO: Best case running time: ??? under what conditions?
+    #     TODO: Worst case running time: ??? under what conditions?"""
+    #     # TODO: Use helper methods and break this algorithm down into 3 cases
+    #     # based on how many children the node containing the given item has and
+    #     # implement new helper methods for subtasks of the more complex cases
         
-        # PSEUDO BRAINSTORM
+    #     # PSEUDO BRAINSTORM
       
 
     def items_in_order(self):
@@ -327,36 +327,39 @@ class BinarySearchTree(object):
     #     TODO: Memory usage: ??? Why and under what conditions?"""
     #     # TODO: Traverse post-order without using recursion (stretch challenge)
 
-    # def items_level_order(self):
-    #     """Return a level-order list of all items in this binary search tree."""
-    #     items = []
-    #     if not self.is_empty():
-    #         # Traverse tree level-order from root, appending each node's item
-    #         self._traverse_level_order_iterative(self.root, items.append)
-    #     # Return level-order list of all items in tree
-    #     return items
+    def items_level_order(self):
+        """Return a level-order list of all items in this binary search tree."""
+        items = []
+        if not self.is_empty():
+            # Traverse tree level-order from root, appending each node's item
+            self._traverse_level_order_iterative(self.root, items.append)
+        # Return level-order list of all items in tree
+        return items
 
-    # def _traverse_level_order_iterative(self, start_node, visit):
-    #     """Traverse this binary tree with iterative level-order traversal (BFS).
-    #     Start at the given node and visit each node with the given function.
-    #     TODO: Running time: ??? Why and under what conditions?
-    #     TODO: Memory usage: ??? Why and under what conditions?"""
-    #     # TODO: Create queue to store nodes not yet traversed in level-order
-    #     queue = ...
-    #     # TODO: Enqueue given starting node
-    #     ...
-    #     # TODO: Loop until queue is empty
-    #     while ...:
-    #         # TODO: Dequeue node at front of queue
-    #         node = ...
-    #         # TODO: Visit this node's data with given function
-    #         # Note: visit is a built in python function 
-    #         # https://docs.python.org/3/library/ast.html
-    #         ...
-    #         # TODO: Enqueue this node's left child, if it exists
-    #         ...
-    #         # TODO: Enqueue this node's right child, if it exists
-    #         ...
+    def _traverse_level_order_iterative(self, start_node, visit):
+        """Traverse this binary tree with iterative level-order traversal (BFS).
+        Start at the given node and visit each node with the given function.
+        Running time: O(n) iterates through all nodes
+        Memory usage: O(n) stores all nodes in a queue"""
+        from queue import LinkedQueue
+        # Create queue to store nodes not yet traversed in level-order
+        queue = LinkedQueue()
+        # Enqueue given starting node
+        queue.enqueue(start_node)
+        # Loop until queue is empty
+        while queue.is_empty() == False:
+            # Dequeue node at front of queue
+            node = queue.dequeue()
+            # Visit this node's data with given function
+            # Note: visit is a built in python function 
+            # https://docs.python.org/3/library/ast.html
+            visit(node.data)
+            # Enqueue this node's left child, if it exists
+            if node.left:
+                queue.enqueue(node.left)
+            # Enqueue this node's right child, if it exists
+            if node.right:
+                queue.enqueue(node.right)
 
 
 def test_binary_search_tree():
