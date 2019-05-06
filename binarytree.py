@@ -295,28 +295,30 @@ class BinarySearchTree(object):
     #     TODO: Memory usage: ??? Why and under what conditions?"""
     #     # TODO: Traverse pre-order without using recursion (stretch challenge)
 
-    # def items_post_order(self):
-    #     """Return a post-order list of all items in this binary search tree."""
-    #     items = []
-    #     if not self.is_empty():
-    #         # Traverse tree post-order from root, appending each node's item
-    #         self._traverse_post_order_recursive(self.root, items.append)
-    #     # Return post-order list of all items in tree
-    #     return items
+    def items_post_order(self):
+        """Return a post-order list of all items in this binary search tree."""
+        items = []
+        if not self.is_empty():
+            # Traverse tree post-order from root, appending each node's item
+            self._traverse_post_order_recursive(self.root, items.append)
+        # Return post-order list of all items in tree
+        return items
 
-    # def _traverse_post_order_recursive(self, node, visit):
-    #     """Traverse this binary tree with recursive post-order traversal (DFS).
-    #     Start at the given node and visit each node with the given function.
-    #     TODO: Running time: ??? Why and under what conditions?
-    #     TODO: Memory usage: ??? Why and under what conditions?"""
-    #     # TODO: Traverse left subtree, if it exists
-    #     ...
-    #     # TODO: Traverse right subtree, if it exists
-    #     ...
-    #     # TODO: Visit this node's data with given function
-    #     # Note: visit is a built in python function 
-    #     # https://docs.python.org/3/library/ast.html
-    #     ...
+    def _traverse_post_order_recursive(self, node, visit):
+        """Traverse this binary tree with recursive post-order traversal (DFS).
+        Start at the given node and visit each node with the given function.
+        Running time: O(n) visit function goes through every node
+        Memory usage: O(1) function does not store any data"""
+        # Traverse left subtree, if it exists
+        if node.left:
+            self._traverse_post_order_recursive(node.left, visit)
+        # Traverse right subtree, if it exists
+        if node.right:
+            self._traverse_post_order_recursive(node.right, visit)
+        # Visit this node's data with given function
+        # Note: visit is a built in python function 
+        # https://docs.python.org/3/library/ast.html
+        visit(node.data)
 
     # def _traverse_post_order_iterative(self, node, visit):
     #     """Traverse this binary tree with iterative post-order traversal (DFS).
