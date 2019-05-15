@@ -5,7 +5,6 @@ from hashtable import HashTable
 class Set(object):
     def __init__(self, elements = None):
         self.hashtable = HashTable()
-        self.size = self.hashtable.size
 
         if elements != None:
             for element in elements:
@@ -19,6 +18,9 @@ class Set(object):
     def __repr__(self):
         """Return a string representation of this hash table."""
         return 'Set({!r})'.format(self.hashtable.items())
+
+    def size(self):
+        return self.hashtable.size
 
     # functions that do stuff within the set class
     def contains(self,element):
@@ -61,7 +63,7 @@ class Set(object):
         intersected_set = Set()
 
         # Slight optimization - determine which set is smaller
-        if other_set.hashtable.size > self.hashtable.size:
+        if other_set.size() > self.size():
             bigger_set = other_set
             smaller_set = self
         else:
@@ -86,7 +88,7 @@ class Set(object):
         # Slight optimization - determine which set is smaller
         # Unsure if this is needed. Presumably intersection_set is always smaller than union? Didn't think
         # of edge cases so this is left in here
-        if union_set.hashtable.size > intersection_set.size:
+        if union_set.size() > intersection_set.size():
             bigger_set = union_set
             smaller_set = intersection_set
         else:
@@ -110,4 +112,4 @@ class Set(object):
         for element in other_set.hashtable.keys():
             if self.contains(element):
                 counter += 1
-        return counter == other_set.hashtable.size
+        return counter == other_set.size()

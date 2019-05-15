@@ -11,7 +11,7 @@ class SetTest(unittest.TestCase):
 
     def test_init(self):
         st = Set()
-        assert st.size == 0
+        assert st.size() == 0
 
     def test_contains(self):
         st = Set(['UO2', 'UO2', 'CaCO3', 'SiO2'])
